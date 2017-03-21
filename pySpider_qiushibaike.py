@@ -1,6 +1,7 @@
 import urllib
 import urllib2
 import re
+import mysql.connector
 
 page = 1
 url = 'http://www.qiushibaike.com/hot/page/' + str(page)
@@ -23,3 +24,11 @@ except urllib2.URLError, e:
     if hasattr(e, "reason"):
         print e.reason
 
+cnx = mysql.connector.connect(user='bc3000user',password='bk5000',host='121.41.25.64',database='bc3000',port='3701')
+cur = cnx.cursor()
+query = "select Id from reports"
+cur.execute(query)
+for Id in cur:
+    print Id
+cur.close()
+cnx.close()
